@@ -35,8 +35,24 @@
       潜伏期: {{summary.remark2}}
     </view>
     <image :src="summary.dailyPic" mode=""></image>
+    <view class="chinaArea">
+      <text>中国境内</text>
+      <view class="provinceShortName" v-for="(country,index) in chinaArea" :key="index">
+        {{country.provinceShortName}}:
+        {{country.confirmedCount}}
+        {{country.curedCount}}
+      </view>  
+    </view>
+    <view class="aboradArea">
+      <text>境外</text>
+      <view class="provinceShortName" v-for="(country,index) in aboradArea" :key="index">
+        {{country.provinceShortName}}:
+        {{country.confirmedCount}}
+        {{country.curedCount}}
+      </view>  
+    </view>
   </view>
-  <!-- view. -->
+
 </template>
 
 <script>
@@ -45,6 +61,9 @@
 			return {
 				summary: [],
         allArea: [],
+        // 使用排序, 清洗数据
+        chinaArea: [],
+        aboradArea: [],
         updateTime: ""
 			}
 		},
@@ -57,9 +76,27 @@
           console.log(that.summary);
           that.formatTime(that.summary.updateTime)
         }
+      }),
+      uni.request({
+        url: "https://lab.isaaclin.cn/nCoV/api/area",
+        success(response) {
+          that.allArea = response.data.results
+          that.formatCountry()
+        }
       })
 		},
 		methods: {
+      formatCountry(){
+        let allArea = this.allArea
+        for(let item in allArea){
+          if(allArea[item].country==="中国"){
+            this.chinaArea.push(allArea[item])
+          }else{
+            this.aboradArea.push(allArea[item])
+          }
+        }
+        console.log(this.chinaArea)
+      },
       formatTime(){
         Date.prototype.Format = function (fmt) {
             var o = {
