@@ -1,0 +1,45 @@
+.summary {
+  border: 1px solid red;
+  padding: 20rpx;
+}
+
+/* 疫情形势 */
+.summary .info {
+  display: flex;
+}
+
+.info .title {
+  font-size: 14px;
+}
+
+.info .number {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.info>view {
+  text-align: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.confirmedCount .number {
+  color: #d81d1b;
+}
+
+.suspectedCount .number {
+  color: #f7ab1a;
+}
+
+.deadCount .number {
+  color: #66666c;
+}
+
+.curedCount .number {
+  color: #178b50;
+}
+
+.map {
+  width: 100%;
+}
