@@ -1,6 +1,6 @@
 .summary {
-  border: 1px solid red;
   padding: 20rpx;
+  font-size: 16px;
 }
 
 /* 疫情形势 */
@@ -42,4 +42,58 @@
 
 .map {
   width: 100%;
+}
+
+/* 各个省详情 */
+.title{
+  display: flex;
+  text-align: center;
+  font-size: 20px;
+}
+.title > view{
+  flex: 1;
+  line-height: 1.8;
+}
+.title >view:nth-child(1){
+  background: #efe9cc;
+}
+.title >view:nth-child(2){
+  background: #ff5a5a;
+}
+.title >view:nth-child(3){
+  background: #65ead1;
+}
+.title >view:nth-child(4){
+  background: #ffe390;
+}
+.province{
+  display: flex;
+  text-align: center;
+  font-size: 20px;
+  background: #f7f7f7;
+}
+.province > view{
+  flex: 1;
+  line-height: 1.8;
+}
+.chinaArea >.text,
+.aboradArea >.text{
+  font-size: 20px;
+  margin: 20rpx 0;
+  display: block;
+  font-weight: bold;
+  position: relative;
+  margin-left: 24rpx;
+}
+.chinaArea >.text::before,
+.aboradArea >.text::before{
+  content: '';
+  display: flex;
+  align-self: center;
+  position: absolute;
+  margin-left: -24rpx;
+  display: inline-block;
+  background-color: #007aff;
+  width: 12rpx;
+  height: 100%;
 }
