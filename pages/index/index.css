@@ -1,5 +1,9 @@
+.clearfix::after{
+  content: '';
+  display: block;
+  clear: both;
+}
 .summary {
-  padding: 20rpx;
   font-size: 16px;
 }
 
@@ -10,6 +14,7 @@
 
 .info .title {
   font-size: 14px;
+  align-self: center;
 }
 
 .info .number {
@@ -19,6 +24,7 @@
 
 .info>view {
   text-align: center;
+  align-self: center;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -43,28 +49,32 @@
 .map {
   width: 100%;
 }
-
+.generalRemark{
+  color: #888888;
+}
 /* 各个省详情 */
 .chinaArea >.text,
-.aboradArea >.text{
-  font-size: 20px;
-  margin: 20rpx 0;
-  display: block;
-  font-weight: bold;
-  position: relative;
-  margin-left: 24rpx;
-}
-.chinaArea >.text::before,
-.aboradArea >.text::before{
-  content: '';
+.aboradArea >.text,
+.news >.text,
+.rumors >.text{
   display: flex;
-  position: absolute;
-  margin-left: -24rpx;
-  background-color: #007aff;
-  width: 12rpx;
-  height: 100%;
+      align-items: center;
+      justify-content: flex-start;
+      height: 2.5em;
+      font-size: 1rem;
+      line-height: 2.5em;
+      background: #fff;
+      border-bottom: .005rem solid #ebebeb;
 }
 
+.i{
+  display: inline-block;
+      width: 0.3em;
+      height: 1em;
+      margin-right: .4em;
+      vertical-align: middle;
+      background: #4169e2;
+}
 .title{
   display: flex;
   text-align: center;
@@ -134,4 +144,35 @@
   flex: 1;
   line-height: 1.5;
   background: #FFFFFF;
+}
+
+/* news模块 */
+.news{
+  background: #F7F7F7;
+  padding-bottom: 0.1px;
+}
+.news .item{
+  padding: 12px;
+  margin: 12px;
+  border-radius: 4px;
+  background: #FFFFFF;
+  /* box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5); */
+}
+.news .newsTitle{
+  font-weight: bold;
+  font-size: 16px;
+}
+.news .pubDate{
+   font-size: 14px;
+   height: 28px;
+   line-height: 28px;
+}
+.news .summary{
+  font-size: 14px;
+  color: #999999;
+}
+.news .infoSource{
+  color: #999999;
+  float: right;
+  font-size: 14px;
 }
