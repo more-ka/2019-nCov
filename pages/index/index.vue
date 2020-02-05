@@ -1,10 +1,10 @@
 <template>
 	<view class="summary" v-if="summary">
     <!-- 疫情形势 -->
-  <view class="updateTime">
+<view class="updateTime">
       数据更新时间: {{formatTime(updateTime)}}
     </view>
-    <view class="info">
+<!--    <view class="info">
       <view class="confirmedCount">
         <text class="number">{{summary.confirmedCount}}</text>
       <text class="title">确诊病例</text>
@@ -40,11 +40,11 @@
     </view> 
     <view class="remark2">
       潜伏期: {{summary.remark2}}
-    </view>
+    </view> -->
 
     
     <!-- 各个省详情 -->
-   <view class="chinaArea">
+<!--   <view class="chinaArea">
       <view class="text"><text class="i"></text>疫情地图</view>
       <image :src="summary.dailyPic" mode="widthFix" class="map"></image>
       <view class="title">
@@ -74,8 +74,8 @@
           </view>
         </view>
       </view>  
-    </view>
-    <view class="aboradArea">
+    </view> -->
+<!--    <view class="aboradArea">
       <view class="text"><text class="i"></text>境外数据</view>
       <view class="title">
           <view class="provinceShortName">地区</view>
@@ -91,10 +91,10 @@
         <view class="deadCount">{{country.deadCount}}</view>
         </view>
       </view>  
-    </view>
+    </view> -->
     
     <!-- 疫情新闻 -->
-    <view class="news">
+<!--    <view class="news">
       <view class="text"><text class="i"></text>实时播报</view>
       <view v-for="(item,index) in news" :key="index" class="item clearfix">
         <view class="newsTitle">{{item.title}}</view>
@@ -102,11 +102,16 @@
         <view class="summary">{{item.summary}}</view>
         <view class="infoSource">信息来源: {{item.infoSource}}</view>
       </view>
-    </view>
+    </view> -->
     <!-- 疫情辟谣 -->
     <view class="rumors">
-      <view class="text"><text class="i"></text>疫情辟谣</view>
-
+      <view class="text"><view class="i"></view>疫情辟谣</view>
+      <view v-for="(item,index) in rumors" :key="index" class="item clearfix">
+        <view class="tag"><text class="index">{{index+1}}</text></view>
+        <view class="newsTitle">{{item.title}}</view>
+        <view class="mainSummary">{{item.mainSummary}}</view>
+        <view class="body">{{item.body}}</view>
+      </view>
     </view>
   </view>
 
@@ -180,19 +185,19 @@
       // })
       
       // 获取疫情辟谣
-      // uni.request({
-      //   url: "https://lab.isaaclin.cn/nCoV/api/rumors",
-      //   success(response) {
-      //     that.rumors = response.data.results
+      uni.request({
+        url: "https://lab.isaaclin.cn/nCoV/api/rumors",
+        success(response) {
+          that.rumors = response.data.results
+          console.log(that.rumors,'---');
+        },
+        fail(err){
+          console.log(err);
+        },
+        complete() {
           
-      //   },
-      //   fail(err){
-      //     console.log(err);
-      //   },
-      //   complete() {
-          
-      //   }
-      // })
+        }
+      })
       
           // setTimeout(()=>{
           //   that.formatCountryCount()
