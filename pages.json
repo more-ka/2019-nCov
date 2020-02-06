@@ -3,7 +3,10 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "疫情动态"
+				"navigationBarTitleText": "疫情动态",
+        "app-plus": {
+          "titleNView": false //禁用原生导航栏
+        }
 			}
 		}
 	],

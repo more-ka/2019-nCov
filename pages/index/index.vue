@@ -1,10 +1,15 @@
 <template>
 	<view class="summary" v-if="summary">
     <!-- 疫情形势 -->
-<view class="updateTime">
+    <view class="header">
+      <view>疫情动态<view class="i"></view></view>
+      <view>实时播报<view class="i"></view></view>
+      <view>疫情辟谣<view class="i"></view></view>
+    </view>
+    <view class="updateTime">
       数据更新时间: {{formatTime(updateTime)}}
     </view>
-<!--    <view class="info">
+   <view class="info">
       <view class="confirmedCount">
         <text class="number">{{summary.confirmedCount}}</text>
       <text class="title">确诊病例</text>
@@ -22,29 +27,29 @@
         <text class="title">死亡人数</text>
       </view>
     </view>
-    
-    <view class="generalRemark">
-      数据来源: {{summary.generalRemark}}
+    <view class="introduce">
+      <view class="generalRemark">
+        数据来源: {{summary.generalRemark}}
+      </view>
+      <view class="infaceSoruce">
+        传染源: {{summary.infectSource}}
+      </view>
+      <view class="virus">
+        病毒: {{summary.virus}}
+      </view>
+      <view class="passWay">
+        传播途径: {{summary.passWay}}
+      </view>
+      <view class="remark1">
+        易感人群: {{summary.remark1}}
+      </view> 
+      <view class="remark2">
+        潜伏期: {{summary.remark2}}
+      </view>
     </view>
-    <view class="infaceSoruce">
-      传染源: {{summary.infectSource}}
-    </view>
-    <view class="virus">
-      病毒: {{summary.virus}}
-    </view>
-    <view class="passWay">
-      传播途径: {{summary.passWay}}
-    </view>
-    <view class="remark1">
-      易感人群: {{summary.remark1}}
-    </view> 
-    <view class="remark2">
-      潜伏期: {{summary.remark2}}
-    </view> -->
 
-    
     <!-- 各个省详情 -->
-<!--   <view class="chinaArea">
+  <view class="chinaArea">
       <view class="text"><text class="i"></text>疫情地图</view>
       <image :src="summary.dailyPic" mode="widthFix" class="map"></image>
       <view class="title">
@@ -74,8 +79,8 @@
           </view>
         </view>
       </view>  
-    </view> -->
-<!--    <view class="aboradArea">
+    </view>
+   <view class="aboradArea">
       <view class="text"><text class="i"></text>境外数据</view>
       <view class="title">
           <view class="provinceShortName">地区</view>
@@ -91,10 +96,10 @@
         <view class="deadCount">{{country.deadCount}}</view>
         </view>
       </view>  
-    </view> -->
+    </view>
     
     <!-- 疫情新闻 -->
-<!--    <view class="news">
+   <view class="news">
       <view class="text"><text class="i"></text>实时播报</view>
       <view v-for="(item,index) in news" :key="index" class="item clearfix">
         <view class="newsTitle">{{item.title}}</view>
@@ -102,7 +107,7 @@
         <view class="summary">{{item.summary}}</view>
         <view class="infoSource">信息来源: {{item.infoSource}}</view>
       </view>
-    </view> -->
+    </view>
     <!-- 疫情辟谣 -->
     <view class="rumors">
       <view class="text"><view class="i"></view>疫情辟谣</view>
@@ -141,9 +146,6 @@
       that.allArea = defAera
       that.news = defNews.results
       that.rumors = defRumors.results
-      console.log(that.allArea);
-      console.log(that.news);
-      console.log(that.rumors);
       // 获取疫情信息
       // uni.request({
       //   url: "https://lab.isaaclin.cn/nCoV/api/overall",
@@ -199,11 +201,11 @@
         }
       })
       
-          // setTimeout(()=>{
-          //   that.formatCountryCount()
-          //   console.log(that.allArea);
-          //   that.formatCountry()
-          // },3000)
+          setTimeout(()=>{
+            that.formatCountryCount()
+            console.log(that.allArea);
+            that.formatCountry()
+          },3000)
 		},
 		methods: {
       provinceClick(e){
@@ -269,7 +271,10 @@
         let date = new Date(Time).Format('yy-MM-dd hh:mm:ss'); //"2018-11-15 17:40:00"
         return date
       }
-		}
+		},
+    onPageScroll(e) {
+      console.log('滚动',e);
+    }
 	}
 </script>
 
