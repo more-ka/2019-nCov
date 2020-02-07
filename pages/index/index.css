@@ -1,3 +1,12 @@
+/* .statusBar{
+  position: fixed;
+  height: var(--status-bar-height);
+  width: 100vw;
+  background: #FFFFFF;
+  z-index: 99;
+  top: 0;
+  left: 0;
+} */
 .clearfix::after{
   content: '';
   display: block;
@@ -117,6 +126,11 @@
   color: #888888;
 }
 /* 各个省详情 */
+.chinaArea,
+.aboradArea{
+  padding: 12px;
+  padding-bottom: 0;
+}
 .chinaArea >.text,
 .aboradArea >.text,
 .news >.text,
@@ -124,16 +138,17 @@
   display: flex;
       align-items: center;
       justify-content: flex-start;
-      height: 2.0;
+      height: 2.5;
       font-size: 20px;
-      line-height: 2.0;
+      line-height: 2.5;
       background: #fff;
+      padding-left: 6px;
       border-bottom: .005rem solid #ebebeb;
 }
 
 .i{
   display: inline-block;
-      width: 0.3em;
+      width: 0.2em;
       height: 1em;
       margin-right: .4em;
       vertical-align: middle;
@@ -242,7 +257,7 @@
    height: 28px;
    line-height: 28px;
 }
-.news .summary{
+.news .itemSummary{
   margin-top: 0;
   font-size: 14px;
   color: #999999;

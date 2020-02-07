@@ -1,6 +1,7 @@
 <template>
+  <view class="page">
+<!--    <view class="statusBar" ></view> -->
 	<view class="summary" id="summary" v-if="summary">
-    
     <!-- 疫情形势 -->
     <view class="header">
       <view @click="summaryClick" class="summaryTitle" ref="summaryTitle">疫情动态<view class="i"></view></view>
@@ -116,14 +117,14 @@
         </view>
       </view>  
     </view>
-    
+    </view>
     <!-- 疫情新闻 -->
    <view class="news" id="news">
       <view class="text"><text class="i"></text>实时播报</view>
       <view v-for="(item,index) in news" :key="index" class="item clearfix">
         <view class="newsTitle">{{item.title}}</view>
         <view class="pubDate">{{formatTime(item.pubDate)}}</view>
-        <view class="summary">{{item.summary}}</view>
+        <view class="itemSummary">{{item.summary}}</view>
         <view class="infoSource">信息来源: {{item.infoSource}}</view>
       </view>
     </view>
@@ -159,6 +160,33 @@
 			}
 		},
     computed:{
+    },
+    onReady() {
+      // this.nodeInViewport('summaryTitle')
+      let viewportHeight
+      uni.getSystemInfo({
+        success(res) {
+          viewportHeight = res.screenHeight
+        }
+      })
+      uni.createIntersectionObserver(this).relativeTo('.scroll',{bottom: -viewportHeight+40}).observe('.summary', (res) => {
+        if(res.intersectionRatio > 0){
+          console.log('summary');
+          this.nodeInViewport('summaryTitle')
+        }
+      })
+      uni.createIntersectionObserver(this).relativeTo('.scroll',{bottom: -viewportHeight+40}).observe('.news', (res) => {
+        if(res.intersectionRatio > 0){
+          console.log('news');
+          this.nodeInViewport('newsTitle')
+        }
+      })
+      uni.createIntersectionObserver(this).relativeTo('.scroll',{bottom: -viewportHeight+40}).observe('.rumors', (res) => {
+        if(res.intersectionRatio > 0){
+          console.log('rumors');
+          this.nodeInViewport('rumorsTitle')
+        }
+      })
     },
 		onLoad() {
       let that = this
@@ -207,29 +235,27 @@
       // })
       
       // 获取疫情辟谣
-      uni.request({
-        url: "https://lab.isaaclin.cn/nCoV/api/rumors",
-        success(response) {
-          that.rumors = response.data.results
-          console.log(that.rumors,'---');
-        },
-        fail(err){
-          console.log(err);
-        },
-        complete() {
+      // uni.request({
+      //   url: "https://lab.isaaclin.cn/nCoV/api/rumors",
+      //   success(response) {
+      //     that.rumors = response.data.results
+      //   },
+      //   fail(err){
+      //     console.log('获取辟谣信息失败');
+      //   },
+      //   complete() {
           
-        }
-      })
+      //   }
+      // })
       
           setTimeout(()=>{
             that.formatCountryCount()
-            console.log(that.allArea);
             that.formatCountry()
           },1000)
           
           setTimeout(()=>{
             uni.createSelectorQuery().select("#summary").boundingClientRect((res)=>{
-              this.updateTimeTop = res.top
+              this.summaryTop = res.top
             }).exec()
             uni.createSelectorQuery().select("#news").boundingClientRect((res)=>{
               this.newsTop = res.top
@@ -240,36 +266,35 @@
           },2000)
 		},
 		methods: {
-      // 二三tab栏切换时,只滚动了距离, 没加上之前的距离, 解决思路是this记录元素的top, 然后在跳转
-      summaryClick(){
-        let allElement = this.$refs.newsTitle.$el.parentElement.childNodes
+      // 传入被点击的tab,该节点被active
+      nodeInViewport(element){
+        let allElement = this.$refs[element].$el.parentElement.childNodes
         for(let i=0;i<allElement.length;i++){
           allElement[i].classList.remove('active')
         }
-        this.$refs.summaryTitle.$el.classList.add('active')
+        this.$refs[element].$el.classList.add('active')
+      },
+      summaryClick(){
+        this.nodeInViewport('summaryTitle')
         uni.pageScrollTo({
           duration: 300,
-          scrollTop: this.updateTimeTop - 40
+          scrollTop: this.summaryTop - 40
         })
       },
       newsClick(){
-        // this.$refs.newsTitle.$el.siblings
-        let allElement = this.$refs.newsTitle.$el.parentElement.childNodes
-        for(let i=0;i<allElement.length;i++){
-          allElement[i].classList.remove('active')
-        }
-        this.$refs.newsTitle.$el.classList.add('active')
+        // let info = uni.createSelectorQuery().select("#news");
+        // console.log(info);
+        // info.boundingClientRect(function(data) { //data - 各种参数
+        // 　　　  　console.log(data)  // 获取元素宽度
+        // 　　    }).exec()
+        this.nodeInViewport('newsTitle')
         uni.pageScrollTo({
           duration: 300,
           scrollTop: this.newsTop - 40
         })
       },
       rumorsClick(){
-        let allElement = this.$refs.newsTitle.$el.parentElement.childNodes
-        for(let i=0;i<allElement.length;i++){
-          allElement[i].classList.remove('active')
-        }
-        this.$refs.rumorsTitle.$el.classList.add('active')
+        this.nodeInViewport('rumorsTitle')
         uni.pageScrollTo({
           duration: 300,
           scrollTop: this.rumorsTop - 40
@@ -305,7 +330,7 @@
                         }
                         return array;
                     }
-                    console.log(SelectionSort(arr))
+                    // console.log(SelectionSort(arr))
       },
       formatCountry(){
         let allArea = this.allArea
@@ -338,7 +363,25 @@
         let date = new Date(Time).Format('yy-MM-dd hh:mm:ss'); //"2018-11-15 17:40:00"
         return date
       }
-		}
+		},
+    onPageScroll(){
+      // let info = uni.createSelectorQuery().select("#news");
+      // console.log(info.scrollOffset());
+      // info.boundingClientRect(function(data) { //data - 各种参数
+      // // 　console.log(data.top)  // 获取元素宽度
+      // }).exec()
+      // uni.createSelectorQuery().selectViewport().scrollOffset(res => {
+      //   console.log("竖直滚动位置" + res);
+      // }).exec();
+      // const query = uni.createSelectorQuery().in(this);
+      // query.select('#news').boundingClientRect(data => {
+      //   // console.log("得到布局位置信息" + JSON.stringify(data));
+      //   console.log("节点离页面顶部的距离为" + data.top);
+      //   if(data.top<40){
+      //     this.$refs.newsTitle.$el.classList.add('active')
+      //   }
+      // }).exec();
+    }
     // mounted() {
     //   console.log(this.$refs.btn.$el.getBoundingClientRect())
     // }
