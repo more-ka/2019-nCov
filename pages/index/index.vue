@@ -1,12 +1,13 @@
 <template>
-	<view class="summary" v-if="summary">
+	<view class="summary" id="summary" v-if="summary">
+    
     <!-- 疫情形势 -->
     <view class="header">
-      <view>疫情动态<view class="i"></view></view>
-      <view>实时播报<view class="i"></view></view>
-      <view>疫情辟谣<view class="i"></view></view>
+      <view @click="summaryClick" class="summaryTitle" ref="summaryTitle">疫情动态<view class="i"></view></view>
+      <view @click="newsClick" class="newsTitle" ref="newsTitle">实时播报<view class="i"></view></view>
+      <view @click="rumorsClick" class="rumorsTitle" ref="rumorsTitle">疫情辟谣<view class="i"></view></view>
     </view>
-    <view class="updateTime">
+    <view class="updateTime" id="updateTime">
       数据更新时间: {{formatTime(updateTime)}}
     </view>
    <view class="info">
@@ -29,28 +30,46 @@
     </view>
     <view class="introduce">
       <view class="generalRemark">
+        <view class="icon">
+          <view class="i"></view>
+        </view>
         数据来源: {{summary.generalRemark}}
       </view>
       <view class="infaceSoruce">
+        <view class="icon">
+          <view class="i"></view>
+        </view>
         传染源: {{summary.infectSource}}
       </view>
       <view class="virus">
+        <view class="icon">
+          <view class="i"></view>
+        </view>
         病毒: {{summary.virus}}
       </view>
       <view class="passWay">
+        <view class="icon">
+          <view class="i"></view>
+        </view>
         传播途径: {{summary.passWay}}
       </view>
       <view class="remark1">
-        易感人群: {{summary.remark1}}
+        <view class="icon">
+          <view class="i"></view>
+        </view>
+        {{summary.remark1}}
       </view> 
       <view class="remark2">
-        潜伏期: {{summary.remark2}}
+        <view class="icon">
+          <view class="i"></view>
+        </view>
+        {{summary.remark2}}
       </view>
     </view>
 
     <!-- 各个省详情 -->
   <view class="chinaArea">
-      <view class="text"><text class="i"></text>疫情地图</view>
+      <!-- <view class="text"><text class="i"></text>疫情地图</view> -->
       <image :src="summary.dailyPic" mode="widthFix" class="map"></image>
       <view class="title">
         <view class="provinceShortName">地区</view>
@@ -99,7 +118,7 @@
     </view>
     
     <!-- 疫情新闻 -->
-   <view class="news">
+   <view class="news" id="news">
       <view class="text"><text class="i"></text>实时播报</view>
       <view v-for="(item,index) in news" :key="index" class="item clearfix">
         <view class="newsTitle">{{item.title}}</view>
@@ -109,8 +128,8 @@
       </view>
     </view>
     <!-- 疫情辟谣 -->
-    <view class="rumors">
-      <view class="text"><view class="i"></view>疫情辟谣</view>
+    <view class="rumors" id="rumors">
+      <view class="text" id="link"><view class="i"></view>疫情辟谣</view>
       <view v-for="(item,index) in rumors" :key="index" class="item clearfix">
         <view class="tag"><text class="index">{{index+1}}</text></view>
         <view class="newsTitle">{{item.title}}</view>
@@ -146,6 +165,7 @@
       that.allArea = defAera
       that.news = defNews.results
       that.rumors = defRumors.results
+      
       // 获取疫情信息
       // uni.request({
       //   url: "https://lab.isaaclin.cn/nCoV/api/overall",
@@ -205,9 +225,56 @@
             that.formatCountryCount()
             console.log(that.allArea);
             that.formatCountry()
-          },3000)
+          },1000)
+          
+          setTimeout(()=>{
+            uni.createSelectorQuery().select("#summary").boundingClientRect((res)=>{
+              this.updateTimeTop = res.top
+            }).exec()
+            uni.createSelectorQuery().select("#news").boundingClientRect((res)=>{
+              this.newsTop = res.top
+            }).exec()
+            uni.createSelectorQuery().select("#rumors").boundingClientRect((res)=>{
+              this.rumorsTop = res.top
+            }).exec()
+          },2000)
 		},
 		methods: {
+      // 二三tab栏切换时,只滚动了距离, 没加上之前的距离, 解决思路是this记录元素的top, 然后在跳转
+      summaryClick(){
+        let allElement = this.$refs.newsTitle.$el.parentElement.childNodes
+        for(let i=0;i<allElement.length;i++){
+          allElement[i].classList.remove('active')
+        }
+        this.$refs.summaryTitle.$el.classList.add('active')
+        uni.pageScrollTo({
+          duration: 300,
+          scrollTop: this.updateTimeTop - 40
+        })
+      },
+      newsClick(){
+        // this.$refs.newsTitle.$el.siblings
+        let allElement = this.$refs.newsTitle.$el.parentElement.childNodes
+        for(let i=0;i<allElement.length;i++){
+          allElement[i].classList.remove('active')
+        }
+        this.$refs.newsTitle.$el.classList.add('active')
+        uni.pageScrollTo({
+          duration: 300,
+          scrollTop: this.newsTop - 40
+        })
+      },
+      rumorsClick(){
+        let allElement = this.$refs.newsTitle.$el.parentElement.childNodes
+        for(let i=0;i<allElement.length;i++){
+          allElement[i].classList.remove('active')
+        }
+        this.$refs.rumorsTitle.$el.classList.add('active')
+        uni.pageScrollTo({
+          duration: 300,
+          scrollTop: this.rumorsTop - 40
+        })
+      },
       provinceClick(e){
         let that = this
         let province = e.currentTarget.dataset.province
@@ -271,10 +338,10 @@
         let date = new Date(Time).Format('yy-MM-dd hh:mm:ss'); //"2018-11-15 17:40:00"
         return date
       }
-		},
-    onPageScroll(e) {
-      console.log('滚动',e);
-    }
+		}
+    // mounted() {
+    //   console.log(this.$refs.btn.$el.getBoundingClientRect())
+    // }
 	}
 </script>
 
