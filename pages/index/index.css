@@ -62,6 +62,8 @@
 .summary .info {
   display: flex;
   background: #FFFFFF;
+  font-size: 10px;
+  padding: 10px 0;
 }
 
 .info .title {
@@ -70,10 +72,12 @@
 }
 
 .info .number {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 }
-
+.info .incr{
+  font-weight: bold;
+}
 .info>view {
   text-align: center;
   align-self: center;
@@ -103,22 +107,27 @@
   height: 12px;
   display: block;
 }
+.confirmedCount .incr,
 .confirmedCount .number {
   color: #d81d1b;
 }
-
+.suspectedCount .incr,
 .suspectedCount .number {
   color: #f7ab1a;
 }
 
-.deadCount .number {
-  color: #66666c;
+.seriousCount .incr,
+.seriousCount .number{
+  color: #a25a4e;
 }
-
+.curedCount .incr,
 .curedCount .number {
   color: #178b50;
 }
-
+.deadCount .incr,
+.deadCount .number {
+  color: #66666c;
+}
 .map {
   width: 100%;
 }
@@ -128,7 +137,7 @@
 /* 各个省详情 */
 .chinaArea,
 .aboradArea{
-  padding: 12px;
+  padding: 0 12px;
   padding-bottom: 0;
 }
 .chinaArea >.text,
@@ -145,7 +154,19 @@
       padding-left: 6px;
       border-bottom: .005rem solid #ebebeb;
 }
-
+.swiper{
+  margin: 20px 0;
+  width: 350px;
+  height: 204px;
+}
+.swiper-item{
+  height: 100%;
+  width: 100%;
+}
+.swiper-item image{
+  width: 350px;
+  height: 182px;
+}
 .i{
   display: inline-block;
       width: 0.2em;
