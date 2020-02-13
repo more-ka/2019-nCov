@@ -13,27 +13,27 @@
     </view>
    <view class="info">
       <view class="confirmedCount">
-        <text>较昨日<text class="incr">{{'+'+summary.confirmedIncr}}</text></text>
+        <text v-if="summary.confirmedIncr">较昨日<text class="incr">{{'+'+summary.confirmedIncr}}</text></text>
         <text class="number">{{summary.confirmedCount}}</text>
       <text class="title">确诊</text>
       </view>
       <view class="suspectedCount">
-        <text>较昨日<text class="incr">{{'+'+summary.suspectedIncr}}</text></text>
+        <text v-if="summary.suspectedIncr">较昨日<text class="incr">{{'+'+summary.suspectedIncr}}</text></text>
         <text class="number">{{summary.suspectedCount}}</text>
      <text class="title">疑似</text>
       </view>
       <view class="seriousCount">
-        <text>较昨日<text class="incr">{{'+'+summary.seriousIncr}}</text></text>
+        <text v-if="summary.seriousIncr">较昨日<text class="incr">{{'+'+summary.seriousIncr}}</text></text>
         <text class="number">{{summary.seriousCount}}</text>
         <text class="title">重症</text>
       </view>
       <view class="curedCount">
-        <text>较昨日<text class="incr">{{'+'+summary.curedIncr}}</text></text>
+        <text v-if="summary.curedIncr">较昨日<text class="incr">{{'+'+summary.curedIncr}}</text></text>
         <text class="number">{{summary.curedCount}}</text>
         <text class="title">治愈</text>
       </view>
       <view class="deadCount">
-        <text>较昨日<text class="incr">{{'+'+summary.deadIncr}}</text></text>
+        <text v-if="summary.deadIncr">较昨日<text class="incr">{{'+'+summary.deadIncr}}</text></text>
         <text class="number">{{summary.deadCount}}</text>
         <text class="title">死亡人数</text>
       </view>
@@ -84,7 +84,7 @@
       :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" indicator-color="rgba(0, 0, 0, .2)">
         <swiper-item v-for="(image,index) in summary.dailyPics" :key="index" >
           <view class="swiper-item">
-            <image :src="image" mode=""></image>
+            <image :src="image" mode="aspectFit"></image>
           </view>
         </swiper-item>
       </swiper>
@@ -165,9 +165,9 @@
 	export default {
 		data() {
 			return {
-				summary: {"infectSource": "该字段已替换为说明2", "passWay": "该字段已替换为说明3", "dailyPic": "https://img1.dxycdn.com/2020/0209/304/3395622307715515876-135.png,https://img1.dxycdn.com/2020/0209/500/3395622320600613307-135.png,https://img1.dxycdn.com/2020/0209/471/3395622333485327662-135.png,https://img1.dxycdn.com/2020/0209/163/3395622348517718202-135.png,https://img1.dxycdn.com/2020/0209/302/3395622361402805639-135.png,https://img1.dxycdn.com/2020/0209/834/3395622376435014382-135.png", "dailyPics": ["https://img1.dxycdn.com/2020/0209/304/3395622307715515876-135.png", "https://img1.dxycdn.com/2020/0209/500/3395622320600613307-135.png", "https://img1.dxycdn.com/2020/0209/471/3395622333485327662-135.png", "https://img1.dxycdn.com/2020/0209/163/3395622348517718202-135.png", "https://img1.dxycdn.com/2020/0209/302/3395622361402805639-135.png", "https://img1.dxycdn.com/2020/0209/834/3395622376435014382-135.png"], "summary": "", "countRemark": "", "confirmedCount": 37289, "suspectedCount": 28942, "curedCount": 2900, "deadCount": 813, "seriousCount": 6188, "suspectedIncr": 3916, "confirmedIncr": 2695, "curedIncr": 849, "deadIncr": 90, "seriousIncr": 87, "virus": "该字段已替换为说明1", "remark1": "易感人群：人群普遍易感。老年人及有基础疾病者感染后病情较重，儿童及婴幼儿也有发病", "remark2": "潜伏期：一般为 3～7 天，最长不超过 14 天，潜伏期内可能存在传染性，其中无症状病例传染性非常罕见", "remark3": "宿主：野生动物，可能为中华菊头蝠", "remark4": "", "remark5": "", "note1": "病毒：新型冠状病毒 2019-nCoV", "note2": "传染源：新冠肺炎的患者。无症状感染者也可能成为传染源。", "note3": "传播途径：经呼吸道飞沫、接触传播是主要的传播途径。气溶胶传播和消化道等传播途径尚待明确。", "generalRemark": "疑似病例数来自国家卫健委数据，目前为全国数据，未分省市自治区等", "abroadRemark": "", "marquee": [], "updateTime": 1581260453855},
+				summary: {"infectSource": "该字段已替换为说明2", "passWay": "该字段已替换为说明3", "dailyPic": "https://img1.dxycdn.com/2020/0211/763/3395998884005602079-135.png,https://img1.dxycdn.com/2020/0211/362/3395998896890788910-135.png,https://img1.dxycdn.com/2020/0211/365/3395998905480724211-135.png,https://img1.dxycdn.com/2020/0211/364/3395998916217859778-135.png,https://img1.dxycdn.com/2020/0211/922/3395998929103046444-135.png,https://img1.dxycdn.com/2020/0211/089/3395998939840182072-135.png", "dailyPics": ["https://img1.dxycdn.com/2020/0211/763/3395998884005602079-135.png", "https://img1.dxycdn.com/2020/0211/362/3395998896890788910-135.png", "https://img1.dxycdn.com/2020/0211/365/3395998905480724211-135.png", "https://img1.dxycdn.com/2020/0211/364/3395998916217859778-135.png", "https://img1.dxycdn.com/2020/0211/922/3395998929103046444-135.png", "https://img1.dxycdn.com/2020/0211/089/3395998939840182072-135.png"], "summary": "", "countRemark": "", "confirmedCount": 44762, "suspectedCount": 16067, "curedCount": 4932, "deadCount": 1115, "seriousCount": 8204, "suspectedIncr": 3342, "confirmedIncr": 2054, "curedIncr": 934, "deadIncr": 98, "seriousIncr": 871, "virus": "该字段已替换为说明1", "remark1": "易感人群：人群普遍易感。老年人及有基础疾病者感染后病情较重，儿童及婴幼儿也有发病", "remark2": "潜伏期：一般为 3～7 天，最长不超过 14 天，潜伏期内可能存在传染性，其中无症状病例传染性非常罕见", "remark3": "宿主：野生动物，可能为中华菊头蝠", "remark4": "", "remark5": "", "note1": "病毒：SARS-CoV-2，其导致疾病命名 COVID-19", "note2": "传染源：新冠肺炎的患者。无症状感染者也可能成为传染源。", "note3": "传播途径：经呼吸道飞沫、接触传播是主要的传播途径。气溶胶传播和消化道等传播途径尚待明确。", "generalRemark": "疑似病例数来自国家卫健委数据，目前为全国数据，未分省市自治区等", "abroadRemark": "", "marquee": [{"id": 223, "marqueeLabel": "资讯", "marqueeContent": "钟南山院士：希望疫情 4 月左右结束", "marqueeLink": "https://ask.dxy.com/ama/index#/activity-share?activity_id=129"}, {"id": 224, "marqueeLabel": "资讯", "marqueeContent": "西藏唯一确诊病例治愈出院", "marqueeLink": "http://dxys.com/iDHiNn"}], "quanguoTrendChart": [{"imgUrl": "https://img1.dxycdn.com/2020/0212/060/3396191695825127796-135.png", "title": "新增疑似/新增确诊"}, {"imgUrl": "https://img1.dxycdn.com/2020/0212/030/3396191721594733248-135.png", "title": "确诊/疑似"}, {"imgUrl": "https://img1.dxycdn.com/2020/0212/106/3396191747364539128-135.png", "title": "新增死亡/新增治愈"}, {"imgUrl": "https://img1.dxycdn.com/2020/0212/104/3396191762397126635-135.png", "title": "死亡/治愈"}, {"imgUrl": "https://img1.dxycdn.com/2020/0212/548/3396191775282029632-135.png", "title": "病死率/治愈率"}], "hbFeiHbTrendChart": [{"imgUrl": "https://img1.dxycdn.com/2020/0212/196/3396191826821441309-135.png", "title": "新增确诊"}, {"imgUrl": "https://img1.dxycdn.com/2020/0212/396/3396191841853828180-135.png", "title": "确诊"}, {"imgUrl": "https://img1.dxycdn.com/2020/0212/422/3396191854738731406-135.png", "title": "死亡/治愈"}, {"imgUrl": "https://img1.dxycdn.com/2020/0212/150/3396191869771318584-135.png", "title": "病死率"}, {"imgUrl": "https://img1.dxycdn.com/2020/0212/071/3396191899836092581-135.png", "title": "治愈率"}], "updateTime": 1581500444358},
         allArea: [],
-        updateTime: 1580386046695,
+        updateTime: 1581473181000,
         chinaArea: [],
         aboradArea: [],
         provinceArray: [],
@@ -185,42 +185,33 @@
           viewportHeight = res.screenHeight
         }
       })
-      console.log('-viewportHeight',-viewportHeight);
-      uni.createIntersectionObserver(this).relativeTo('.scroll-view',{top: -viewportHeight + 40}).observe('#summary', (res) => {
-        if(res.intersectionRatio > 0){
-          // console.log('summary');
-          this.nodeInViewport('summaryTitle')
-        }
-      })
-      uni.createIntersectionObserver(this).relativeTo('.scroll-view',{bottom: -viewportHeight + 40}).observe('#news', (res) => {
-          // console.log('news');
-          if(res.intersectionRatio > 0){
-          this.nodeInViewport('newsTitle')
-        }
-      })
-      uni.createIntersectionObserver(this).relativeTo('.scroll-view',{bottom: -viewportHeight + 40}).observe('#rumors', (res) => {
-        if(res.intersectionRatio > 0){
-          // console.log('rumors');
-          this.nodeInViewport('rumorsTitle')
-        }
-      })
+        uni.createIntersectionObserver(this).relativeTo('.scroll-view',{top: -viewportHeight + 40}).observe('#summary', (res) => {
+          if(res.intersectionRatio > 0){ this.nodeInViewport('summaryTitle') }
+        })
+        uni.createIntersectionObserver(this).relativeTo('.scroll-view',{bottom: -viewportHeight + 40}).observe('#news', (res) => {
+          if(res.intersectionRatio > 0){ this.nodeInViewport('newsTitle') }
+        })
+        uni.createIntersectionObserver(this).relativeTo('.scroll-view',{bottom: -viewportHeight + 40}).observe('#rumors', (res) => {
+          if(res.intersectionRatio > 0){ this.nodeInViewport('rumorsTitle') }
+        })
     },
 		onLoad() {
       let that = this
-      // that.allArea = defAera
-      // that.news = defNews.results
-      // that.rumors = defRumors.results
+      uni.showToast({
+        title: '请稍后',
+        icon: 'loading',
+        mask: true
+      })
       
       // 获取疫情信息
       uni.request({
         url: "https://lab.isaaclin.cn/nCoV/api/overall",
         success(response) {
           that.summary = response.data.results[0]
-          console.log('summary',that.summary);
           that.updateTime = that.summary.updateTime
         },
         fail(err) {
-          // that.allArea = that.summary
+          
         }
       }),
       
@@ -229,14 +220,13 @@
         url: "https://lab.isaaclin.cn/nCoV/api/area",
         success(response) {
           that.allArea = response.data.results
-          console.log('area',that.allArea);
-          that.formatCountryCount()
-          that.formatCountryCount()
         },
         fail(err){
           that.allArea = defAera
         },
         complete() {
+            that.formatCountryCount()
+            that.formatCountry()
         }
       })
       
@@ -245,10 +235,9 @@
         url: "https://lab.isaaclin.cn/nCoV/api/news",
         success(response) {
           that.news = response.data.results
-          console.log('news',that.news);
         },
         fail(err){
-          console.log(err);
+          that.news = defNews.results
         },
         complete() {
           
@@ -260,28 +249,14 @@
         url: "https://lab.isaaclin.cn/nCoV/api/rumors",
         success(response) {
           that.rumors = response.data.results
-          console.log('rumors',that.rumors);
         },
         fail(err){
-          console.log('获取辟谣信息失败');
+          that.rumors = defRumors.results
         },
         complete() {
           
         }
       })
-      
-          
-          setTimeout(()=>{
-            uni.createSelectorQuery().select("#summary").boundingClientRect((res)=>{
-              this.summaryTop = res.top  -40
-            }).exec()
-            uni.createSelectorQuery().select("#news").boundingClientRect((res)=>{
-              this.newsTop = res.top -40
-            }).exec()
-            uni.createSelectorQuery().select("#rumors").boundingClientRect((res)=>{
-              this.rumorsTop = res.top -40
-            }).exec()
-          },2000)
 		},
 		methods: {
       // 传入被点击的tab,该节点被active
@@ -291,7 +266,6 @@
           allElement[i].classList.remove('active')
         }
         this.$refs[element].$el.classList.add('active')
-        console.log(element)
       },
       summaryClick(){
         // this.nodeInViewport('summaryTitle')
@@ -301,12 +275,6 @@
         })
       },
       newsClick(){
-        // let info = uni.createSelectorQuery().select("#news");
-        // console.log(info);
-        // info.boundingClientRect(function(data) { //data - 各种参数
-        // 　　　  　console.log(data)  // 获取元素宽度
-        // 　　    }).exec()
-        // this.nodeInViewport('newsTitle')
         uni.pageScrollTo({
           duration: 300,
           scrollTop: this.newsTop - 1
@@ -335,8 +303,7 @@
         }
       },
       formatCountryCount(){
-            // let allArea = this.chinaArea.length
-            var arr = this.allArea
+            var array = this.allArea
             function SelectionSort(array){
                         if(array.length<=1){
                             return array;
@@ -353,7 +320,7 @@
                         }
                         return array;
                     }
-                    // console.log(SelectionSort(arr))
+                    SelectionSort(array)
       },
       formatCountry(){
         let allArea = this.allArea
@@ -364,6 +331,22 @@
             this.aboradArea.push(allArea[item])
           }
         }
+        setTimeout(()=>{
+          this.getNodeHeight()
+        },500)
+      },
+      getNodeHeight(){
+        let that = this
+        uni.createSelectorQuery().select("#summary").boundingClientRect((res)=>{
+          this.summaryTop = res.top  -40
+        }).exec()
+        uni.createSelectorQuery().select("#news").boundingClientRect((res)=>{
+          this.newsTop = res.top -40
+        }).exec()
+        uni.createSelectorQuery().select("#rumors").boundingClientRect((res)=>{
+          this.rumorsTop = res.top -40
+        }).exec()
+        uni.hideToast()
       },
       // 时间处理函数
       formatTime(Time){
@@ -388,26 +371,8 @@
       }
 		},
     onPageScroll(){
-      // let info = uni.createSelectorQuery().select("#news");
-      // console.log(info.scrollOffset());
-      // info.boundingClientRect(function(data) { //data - 各种参数
-      // // 　console.log(data.top)  // 获取元素宽度
-      // }).exec()
-      // uni.createSelectorQuery().selectViewport().scrollOffset(res => {
-      //   console.log("竖直滚动位置" + res);
-      // }).exec();
-      // const query = uni.createSelectorQuery().in(this);
-      // query.select('#news').boundingClientRect(data => {
-      //   // console.log("得到布局位置信息" + JSON.stringify(data));
-      //   console.log("节点离页面顶部的距离为" + data.top);
-      //   if(data.top<40){
-      //     this.$refs.newsTitle.$el.classList.add('active')
-      //   }
-      // }).exec();
+      
     }
-    // mounted() {
-    //   console.log(this.$refs.btn.$el.getBoundingClientRect())
-    // }
 	}
 </script>
 
