@@ -80,11 +80,12 @@
     <!-- 各个省详情 -->
   <view class="chinaArea">
       <!-- <view class="text"><text class="i"></text>疫情地图</view> -->
-      <swiper class="swiper" 
+      
+      <swiper class="swiper" v-if="summary.dailyPics"
       :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" indicator-color="rgba(0, 0, 0, .2)">
         <swiper-item v-for="(image,index) in summary.dailyPics" :key="index" >
           <view class="swiper-item">
-            <image :src="image" mode="aspectFit"></image>
+            <image :src="image" class="image" mode="aspectFit"></image>
           </view>
         </swiper-item>
       </swiper>
@@ -94,7 +95,7 @@
         <view class="curedCount">治愈</view>
         <view class="deadCount">死亡</view>
       </view>
-      <view class="province" v-for="(country,index) in chinaArea" :key="index">
+<!--      <view class="province" v-for="(country,index) in chinaArea" :key="index">
         <view class="row" @click="provinceClick" :data-province="country.provinceShortName">
             <image src="../../static/right.png" class="rightIcon" v-if="provinceArray.indexOf(country.provinceShortName) === -1 && country.cities.length !== 0"></image>
             <image src="../../static/right.png" class="downIcon" v-if="provinceArray.indexOf(country.provinceShortName) !== -1 && country.cities.length !== 0"></image>
@@ -114,9 +115,9 @@
             <view class="countryDeadCount">{{city.deadCount}}</view>
           </view>
         </view>
-      </view>  
+      </view> --> 
     </view>
-   <view class="aboradArea">
+<!--   <view class="aboradArea">
       <view class="text"><text class="i"></text>境外数据</view>
       <view class="title">
           <view class="provinceShortName">地区</view>
@@ -132,7 +133,7 @@
         <view class="deadCount">{{country.deadCount}}</view>
         </view>
       </view>  
-    </view>
+    </view> -->
     </view>
     <!-- 疫情新闻 -->
    <view class="news" id="news">
@@ -159,6 +160,7 @@
 </template>
 
 <script>
+  
   import defAera from '../../common/allArea.js'
   import defNews from '../../common/news.js'
   import defRumors from '../../common/rumors.js'
@@ -178,7 +180,7 @@
     computed:{
     },
     onReady() {
-      // this.nodeInViewport('summaryTitle')
+      this.nodeInViewport('summaryTitle')
       let viewportHeight
       uni.getSystemInfo({
         success(res) {
@@ -325,7 +327,7 @@
       formatCountry(){
         let allArea = this.allArea
         for(let item in allArea){
-          if(allArea[item].country==="中国"){
+          if(allArea[item].countryName==="中国" || allArea[item].country==="中国"){
             this.chinaArea.push(allArea[item])
           }else{
             this.aboradArea.push(allArea[item])

@@ -9,6 +9,10 @@
         }
 			}
 		}
+        ,{
+            "path" : "pages/ucharts/ucharts",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
