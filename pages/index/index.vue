@@ -95,7 +95,7 @@
         <view class="curedCount">治愈</view>
         <view class="deadCount">死亡</view>
       </view>
-<!--      <view class="province" v-for="(country,index) in chinaArea" :key="index">
+     <view class="province" v-for="(country,index) in chinaArea" :key="index">
         <view class="row" @click="provinceClick" :data-province="country.provinceShortName">
             <image src="../../static/right.png" class="rightIcon" v-if="provinceArray.indexOf(country.provinceShortName) === -1 && country.cities.length !== 0"></image>
             <image src="../../static/right.png" class="downIcon" v-if="provinceArray.indexOf(country.provinceShortName) !== -1 && country.cities.length !== 0"></image>
@@ -115,9 +115,9 @@
             <view class="countryDeadCount">{{city.deadCount}}</view>
           </view>
         </view>
-      </view> --> 
+      </view> 
     </view>
-<!--   <view class="aboradArea">
+  <view class="aboradArea">
       <view class="text"><text class="i"></text>境外数据</view>
       <view class="title">
           <view class="provinceShortName">地区</view>
@@ -133,7 +133,7 @@
         <view class="deadCount">{{country.deadCount}}</view>
         </view>
       </view>  
-    </view> -->
+    </view>
     </view>
     <!-- 疫情新闻 -->
    <view class="news" id="news">
