@@ -58,7 +58,8 @@
   display: flex;
   background: #FFFFFF;
   font-size: 10px;
-  padding: 10px 0;
+  padding: 10px 0 0;
+  flex-wrap: wrap;
 }
 
 .info .title {
@@ -77,8 +78,9 @@
   text-align: center;
   align-self: center;
   display: flex;
-  flex: 1;
+  width: 33%;
   flex-direction: column;
+  margin-bottom: 16px;
 }
 .introduce{
   margin: 20px 0;
@@ -101,6 +103,13 @@
   width: 12px;
   height: 12px;
   display: block;
+}
+.currentConfirmedCount{
+  align-self: flex-end;
+}
+
+.currentConfirmedCount .number{
+  color: red;
 }
 .confirmedCount .incr,
 .confirmedCount .number {
